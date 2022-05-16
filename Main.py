@@ -18,13 +18,23 @@ def main():
     for i in range(len(df)):
         c = listCountries[i]
         f = df["flag"][i]
-        
-        if (c == "France"):
-            print(c, end=" ")
-            for i in range(len(f)):
-                for j in range(len(f[i])):
-                    a = f[i][j]
-                    print(get_colour_name(a))
+        x = 0
+        y = 0
+        #if (c == "France"):
+        print(c, end=" ")
+        for i in range(len(f)):
+            for j in f[i]:
+                x = x + 1
+                if (get_colour_name(j) == "red"):
+                    y = y + 1
+
+        ratio = y / x
+        print(c, end =' ')
+        print(":", end = ' ')
+        print(ratio)
+
+
+                    
         #Traitement ici sur F
 
 
