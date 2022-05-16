@@ -1,5 +1,7 @@
 
+import flagpy as fp
 def main():
+    fp.display('Ivory Coast')
     print(2)
 
 
