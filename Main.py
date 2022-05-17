@@ -49,7 +49,8 @@ def main():
     print(listCountries)
     #get_country_proportion_of_country_red("China")
     
-    classement_par_couleur()
+    listSorted = classement_par_couleur()
+    
     #C'EST LONG TRES LONG
     
 
