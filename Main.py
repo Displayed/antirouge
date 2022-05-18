@@ -1,4 +1,4 @@
-import progressbar
+import progressbar2
 import flagpy as fp
 import webcolors
 def get_colour_name(rgb_triplet, a = webcolors.CSS21_HEX_TO_NAMES.items()):
