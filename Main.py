@@ -1,7 +1,6 @@
 import progressbar
 import flagpy as fp
 import webcolors
-import time
 def get_colour_name(rgb_triplet, a = webcolors.CSS21_HEX_TO_NAMES.items()):
 
     min_colours = {}
