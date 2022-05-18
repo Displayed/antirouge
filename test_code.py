@@ -1,4 +1,5 @@
 from Main import *
-
+#For GithubAction
 def test_coucou():
-    return 2
+    get_country_proportion_of_country_red("China")
+    return 1
