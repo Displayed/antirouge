@@ -1,4 +1,4 @@
-import progressbar2
+import progressbar
 import flagpy as fp
 import webcolors
 def get_colour_name(rgb_triplet, a = webcolors.CSS21_HEX_TO_NAMES.items()):
@@ -17,7 +17,7 @@ def get_country_proportion_of_country_red(countr = "", prin=1):
     df = fp.get_flag_df()
     listCountries = fp.get_country_list()
     listc = {}
-    bar = progressbar.ProgressBar(max_value=len(df))
+    bar = progressbar.ProgressBar(maxval=len(df))
     bar.update(0)
     for i in range(len(df)):
         c = listCountries[i]
