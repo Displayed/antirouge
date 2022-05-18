@@ -1,3 +1,3 @@
 flagpy
 webcolors
-progressbar
+progressbar2
