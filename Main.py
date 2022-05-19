@@ -12,13 +12,19 @@ def get_colour_name(rgb_triplet, a = webcolors.CSS21_HEX_TO_NAMES.items()):
         min_colours[(rd + gd + bd)] = name
     return min_colours[min(min_colours.keys())]
     
-
+def check(a, b):
+    if a[0] != b[0] or a[1] != b[1] or a[2] != b[2]:
+        return False
+    return True
+    
 def get_country_proportion_of_country_red(countr = "", prin=1):
     df = fp.get_flag_df()
     listCountries = fp.get_country_list()
     listc = {}
     bar = progressbar.ProgressBar(maxval=len(df))
     bar.update(0)
+    last_c = [0, -1 ,0]
+    colour = "black"
     for i in range(len(df)):
         c = listCountries[i]
         f = df["flag"][i]
@@ -29,7 +35,9 @@ def get_country_proportion_of_country_red(countr = "", prin=1):
             for ii in f:
                 for j in ii:
                     x = x + 1
-                    colour = get_colour_name(j, webcolors.CSS21_HEX_TO_NAMES.items())
+                    if (not check(last_c, j)):
+                        colour = get_colour_name(j, webcolors.CSS21_HEX_TO_NAMES.items())
+                        last_c = j
                     if (colour == "red"):
                         y = y + 1
             ratio = y / x
