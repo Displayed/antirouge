@@ -16,7 +16,7 @@ def check(a, b):
     if a[0] != b[0] or a[1] != b[1] or a[2] != b[2]:
         return False
     return True
-    
+
 def get_country_proportion_of_country_red(countr = "", prin=1):
     df = fp.get_flag_df()
     listCountries = fp.get_country_list()
@@ -49,7 +49,10 @@ def get_country_proportion_of_country_red(countr = "", prin=1):
         bar.update(i)
     return listc
 def classement_par_couleur():
-    print(get_country_proportion_of_country_red("", 0))
+    ret = sorted(get_country_proportion_of_country_red("", 0).items(), key = lambda t: t[1], reverse=True)
+    for i in ret: 
+        print(i[0], end = " : ")
+        print(i[1], end=" %\n")
 
 def main():
     listCountries = fp.get_country_list()
