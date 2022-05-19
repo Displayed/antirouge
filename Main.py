@@ -47,12 +47,14 @@ def get_country_proportion_of_country_red(countr = "", prin=1):
                 print(":", end = ' ')
                 print(ratio)
         bar.update(i)
+    bar.finish()
     return listc
 def classement_par_couleur():
     ret = sorted(get_country_proportion_of_country_red("", 0).items(), key = lambda t: t[1], reverse=True)
     for i in ret: 
         print(i[0], end = " : ")
         print(i[1], end=" %\n")
+    return ret
 
 def main():
     listCountries = fp.get_country_list()
