@@ -22,6 +22,7 @@ def get_country_proportion_of_country_red(countr = "", prin=1):
     listCountries = fp.get_country_list()
     listc = {}
     bar = progressbar.ProgressBar(maxval=len(df))
+    bar.start()
     bar.update(0)
     last_c = [0, -1 ,0]
     colour = "black"
