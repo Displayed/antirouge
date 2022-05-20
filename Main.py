@@ -54,7 +54,7 @@ def classement_par_couleur():
     ret = sorted(get_country_proportion_of_country_red("", 0).items(), key = lambda t: t[1], reverse=True)
     for i in ret: 
         print(i[0], end = " : ")
-        print(i[1], end=" %\n")
+        print(i[1] * 100, end=" %\n")
     return ret
 
 def main():
