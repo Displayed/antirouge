@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from webcolors import hex_to_rgb, CSS21_HEX_TO_NAMES
 def distance(color1,color2):
     r = (color1[0]+color2[0])/2
@@ -42,7 +41,7 @@ def get_ratio_color(pic,color):
                 count += 1
     return count / total
 
-def get_ratio_colors(pic,colors):
+def get_ratio_colors(pic,colors=None):
     previous_pixel = None
     color_name = None
     total = 0
@@ -55,6 +54,5 @@ def get_ratio_colors(pic,colors):
                 color_name = get_colour_name(pixel,colors)
             if color_name:
                 count[color_name] = count.get(color_name,0) + 1
-    ratio = dict([(k,100*v/total)for k,v in count.items()])
+    ratio = dict((k,100*v/total)for k,v in count.items())
     return ratio
-     

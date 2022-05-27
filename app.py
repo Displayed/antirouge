@@ -1,8 +1,8 @@
-from tkinter import W
+from sys import flags
 from Utils import *
 from flagpy import get_flag_df
-from progressbar import ProgressBar
 from csv import DictWriter
+from progressbar import ProgressBar
 
 COLORS = {
         '#ffa500': 'orange',
@@ -21,39 +21,47 @@ COLORS = {
         '#ffffff': 'white',
         '#ffff00': 'yellow'
         }
-
-def main(flags,colors=COLORS):
-    bar = ProgressBar(maxval=len(flags))
-    bar.start()
-    count = 0
-    ration = {}
-    for name,flag in flags.items():
-        bar.update(count)
-        count+=1
-        ration[name] = get_ratio_colors(flag,colors)
-    bar.finish()
-    return ration
+export_file = "result.csv"
 
 if __name__ == '__main__':
     df = get_flag_df()
-    result = main(df.flag)
-    export_file = "result.csv"
-    colors = [COLORS[color] for color in COLORS]
-    colors_ratio = dict((c,0) for c in colors)
+    flags = df.flag
+    bar = ProgressBar(maxval=len(flags))
+    
+
+
+    result = {}
+    
+    colors_ratio = dict((v,0) for c,v in COLORS.items())
+
+    count = 0
+    bar.start()
+    for name,pic in flags.items():
+        bar.update(count)
+        count+=1
+        ratio = get_ratio_colors(pic,COLORS)
+        for c,n in colors_ratio.items():
+            colors_ratio[c] = ratio.get(c,0) + n
+        result[name] = ratio
+
+    for c,n in colors_ratio.items():
+        colors_ratio[c] =  n/count
+    
+    bar.update(count)
+    bar.finish()
+    print(colors_ratio)
+
+
+
+    
     with open(export_file, 'w', newline='') as csvfile:
-        fields_names =['pays']  + colors
+        colors_names = [color for color in COLORS.values()]
+        fields_names = ['pays']  + colors_names
         writer = DictWriter(csvfile, fieldnames=fields_names)
         writer.writeheader()
-        count = 0
         for k,v in result.items():
-            count += 1
-            for c,n in colors_ratio.items():
-                colors_ratio[c] = v.get(c,0) + n
             v['pays'] = k
             writer.writerow(v)
-        for c,n in colors_ratio.items():
-                colors_ratio[c] =  n/count
-        print(colors_ratio)
 
 
 
