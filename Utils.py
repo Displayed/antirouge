@@ -1,3 +1,4 @@
+from re import L
 from webcolors import hex_to_rgb, CSS21_HEX_TO_NAMES
 def distance(color1,color2):
     r = (color1[0]+color2[0])/2
@@ -56,3 +57,6 @@ def get_ratio_colors(pic,colors=None):
                 count[color_name] = count.get(color_name,0) + 1
     ratio = dict((k,100*v/total)for k,v in count.items())
     return ratio
+
+def sort_by_color(ratio,color,reverse=False):
+    return sorted(ratio, key=lambda c : ratio[c].get(color,0),reverse=reverse)

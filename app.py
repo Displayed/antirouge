@@ -21,9 +21,8 @@ COLORS = {
         '#ffffff': 'white',
         '#ffff00': 'yellow'
         }
-export_file = "result.csv"
 
-if __name__ == '__main__':
+def get_ratio_colors_in_flags(export_file,colors):
     df = get_flag_df()
     flags = df.flag
     bar = ProgressBar(maxval=len(flags))
@@ -32,14 +31,14 @@ if __name__ == '__main__':
 
     result = {}
     
-    colors_ratio = dict((v,0) for c,v in COLORS.items())
+    colors_ratio = dict((v,0) for c,v in colors.items())
 
     count = 0
     bar.start()
     for name,pic in flags.items():
         bar.update(count)
         count+=1
-        ratio = get_ratio_colors(pic,COLORS)
+        ratio = get_ratio_colors(pic,colors)
         for c,n in colors_ratio.items():
             colors_ratio[c] = ratio.get(c,0) + n
         result[name] = ratio
@@ -55,14 +54,17 @@ if __name__ == '__main__':
 
     
     with open(export_file, 'w', newline='') as csvfile:
-        colors_names = [color for color in COLORS.values()]
+        colors_names = [color for color in colors.values()]
         fields_names = ['pays']  + colors_names
         writer = DictWriter(csvfile, fieldnames=fields_names)
         writer.writeheader()
         for k,v in result.items():
             v['pays'] = k
             writer.writerow(v)
-
-
-
-
+    return result
+    
+if __name__ == '__main__':
+    export_file = "result.csv"
+    result = get_ratio_colors_in_flags(export_file,COLORS)
+    sortered = sort_by_color(result,"red")
+    print(sortered)
