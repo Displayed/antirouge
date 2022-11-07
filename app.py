@@ -48,7 +48,7 @@ def get_ratio_colors_in_flags(export_file,colors):
     
     bar.update(count)
     bar.finish()
-    print(colors_ratio)
+    #print(colors_ratio)
 
 
 
